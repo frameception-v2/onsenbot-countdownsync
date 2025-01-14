@@ -27,7 +27,6 @@ import { truncateAddress } from "~/lib/truncateAddress";
 import { base, optimism } from "wagmi/chains";
 import { BaseError, UserRejectedRequestError } from "viem";
 import { useSession } from "next-auth/react"
-import { createStore } from 'mipd'
 import { Label } from "~/components/ui/label";
 import { Button } from "~/components/ui/button";
 import { PROJECT_TITLE } from "~/lib/constants";
@@ -137,20 +136,6 @@ export default function Frame(
       console.log("Calling ready");
       sdk.actions.ready({});
 
-// Set up a MIPD Store
-const store = createStore()
-
-// Request and subscribe to providers
-store.requestProviders()
-store.subscribe((providerDetails) => {
-  console.log("PROVIDER DETAILS", providerDetails)
-  // Connect to first available provider
-  if (providerDetails.length > 0) {
-    const provider = providerDetails[0].provider
-    // Use provider with wagmi
-    connect({ connector: config.connectors[0] })
-  }
-})
 
     };
     if (sdk && !isSDKLoaded) {
