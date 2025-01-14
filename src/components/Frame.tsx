@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useCallback, useState, useMemo } from "react";
-import { Input } from "./ui/input"
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 import { signIn, signOut, getCsrfToken } from "next-auth/react";
 import sdk, {
     AddFrame,
@@ -252,7 +253,7 @@ export default function Frame(
   }, [chainId, signTypedData]);
 
   const toggleContext = useCallback(() => {
-    setIsContextOpen((Labelv) => !Labelv);
+    setIsContextOpen((prev) => !prev);
   }, []);
 
   if (!isSDKLoaded) {
@@ -317,7 +318,7 @@ export default function Frame(
 
           <div className="mb-4">
             <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg my-2">
-              <Label className="font-mono text-xs whitespace-Label-wrap break-words max-w-[260px] overflow-x-0">
+              <Label className="font-mono text-xs whitespace-pre-wrap break-words max-w-[260px] overflow-x-auto">
                 sdk.actions.openUrl
               </Label>
             </div>
@@ -326,7 +327,7 @@ export default function Frame(
 
           <div className="mb-4">
             <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg my-2">
-              <Label className="font-mono text-xs whitespace-Label-wrap break-words max-w-[260px] overflow-x-0">
+              <Label className="font-mono text-xs whitespace-pre-wrap break-words max-w-[260px] overflow-x-auto">
                 sdk.actions.viewProfile
               </Label>
             </div>
@@ -651,13 +652,13 @@ function SignIn() {
       {signInFailure && !signingIn && (
         <div className="my-2 p-2 text-xs overflow-x-scroll bg-gray-100 rounded-lg font-mono">
           <div className="font-semibold text-gray-500 mb-1">SIWF Result</div>
-          <div className="whitespace-Label">{signInFailure}</div>
+          <div className="whitespace-pre-wrap">{signInFailure}</div>
         </div>
       )}
       {signInResult && !signingIn && (
         <div className="my-2 p-2 text-xs overflow-x-scroll bg-gray-100 rounded-lg font-mono">
           <div className="font-semibold text-gray-500 mb-1">SIWF Result</div>
-          <div className="whitespace-Label">{JSON.stringify(signInResult, null, 2)}</div>
+          <div className="whitespace-pre-wrap">{JSON.stringify(signInResult, null, 2)}</div>
         </div>
       )}
     </>
