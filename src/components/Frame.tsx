@@ -62,19 +62,26 @@ export default function Frame(
   }
 
   return (
-    <div style={{ 
-      paddingTop: context?.client.safeAreaInsets?.top ?? 0, 
-      paddingBottom: context?.client.safeAreaInsets?.bottom ?? 0,
-      paddingLeft: context?.client.safeAreaInsets?.left ?? 0,
-      paddingRight: context?.client.safeAreaInsets?.right ?? 0,
-    }}>
-      <div className="w-[300px] mx-auto py-2 px-2">
-        <h1 className="text-2xl font-bold text-center mb-4">{title}</h1>
-        <div className="text-center text-3xl font-bold">
-          {timeLeft}
-        </div>
-        <div className="text-center text-sm mt-2">
-          Until Thursday 5pm
+    <div 
+      className="min-h-screen flex items-center justify-center bg-gradient-to-b from-purple-50 to-pink-50"
+      style={{ 
+        paddingTop: context?.client.safeAreaInsets?.top ?? 0, 
+        paddingBottom: context?.client.safeAreaInsets?.bottom ?? 0,
+        paddingLeft: context?.client.safeAreaInsets?.left ?? 0,
+        paddingRight: context?.client.safeAreaInsets?.right ?? 0,
+      }}
+    >
+      <div className="w-full max-w-[400px] mx-auto p-4">
+        <h1 className="text-3xl md:text-4xl font-bold text-center mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+          {title}
+        </h1>
+        <div className="bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl p-6 shadow-lg">
+          <div className="text-center text-4xl md:text-5xl font-bold text-white">
+            {timeLeft}
+          </div>
+          <div className="text-center text-sm mt-3 text-purple-100">
+            Until Thursday 5pm
+          </div>
         </div>
       </div>
     </div>
