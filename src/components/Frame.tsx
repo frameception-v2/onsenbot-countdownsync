@@ -29,6 +29,7 @@ import { BaseError, UserRejectedRequestError } from "viem";
 import { useSession } from "next-auth/react"
 import { createStore } from 'mipd'
 import { Label } from "~/components/ui/label";
+import { Button } from "~/components/ui/button";
 import { PROJECT_TITLE } from "~/lib/constants";
 
 
@@ -136,13 +137,19 @@ export default function Frame(
       console.log("Calling ready");
       sdk.actions.ready({});
 
-// Set up a MIPD Store, and request Providers.
+// Set up a MIPD Store
 const store = createStore()
 
-// Subscribe to the MIPD Store.
-store.subscribe(providerDetails => {
+// Request and subscribe to providers
+store.requestProviders()
+store.subscribe((providerDetails) => {
   console.log("PROVIDER DETAILS", providerDetails)
-  // => [EIP6963ProviderDetail, EIP6963ProviderDetail, ...]
+  // Connect to first available provider
+  if (providerDetails.length > 0) {
+    const provider = providerDetails[0].provider
+    // Use provider with wagmi
+    connect({ connector: config.connectors[0] })
+  }
 })
 
     };
@@ -295,7 +302,7 @@ store.subscribe(providerDetails => {
 
           {isContextOpen && (
             <div className="p-4 mt-2 bg-gray-100 dark:bg-gray-800 rounded-lg">
-              <Label className="font-mono text-xs whitespace-Label-wrap break-words max-w-[260px] overflow-x-0">
+              <Label className="font-mono text-xs whitespace-pre-wrap break-words max-w-[260px] overflow-x-auto">
                 {JSON.stringify(context, null, 2)}
               </Label>
             </div>
@@ -307,7 +314,7 @@ store.subscribe(providerDetails => {
 
           <div className="mb-4">
             <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg my-2">
-              <Label className="font-mono text-xs whitespace-Label-wrap break-words max-w-[260px] overflow-x-0">
+              <Label className="font-mono text-xs whitespace-pre-wrap break-words max-w-[260px] overflow-x-auto">
                 sdk.actions.signIn
               </Label>
             </div>
@@ -316,7 +323,7 @@ store.subscribe(providerDetails => {
 
           <div className="mb-4">
             <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg my-2">
-              <Label className="font-mono text-xs whitespace-Label-wrap break-words max-w-[260px] overflow-x-0">
+              <Label className="font-mono text-xs whitespace-pre-wrap break-words max-w-[260px] overflow-x-auto">
                 sdk.actions.openUrl
               </Label>
             </div>
@@ -355,7 +362,7 @@ store.subscribe(providerDetails => {
           <h2 className="font-2xl font-bold">Last event</h2>
 
           <div className="p-4 mt-2 bg-gray-100 dark:bg-gray-800 rounded-lg">
-            <Label className="font-mono text-xs whitespace-Label-wrap break-words max-w-[260px] overflow-x-0">
+            <Label className="font-mono text-xs whitespace-pre-wrap break-words max-w-[260px] overflow-x-auto">
               {lastEvent || "none"}
             </Label>
           </div>
@@ -653,7 +660,7 @@ function SignIn() {
       {session &&
         <div className="my-2 p-2 text-xs overflow-x-scroll bg-gray-100 rounded-lg font-mono">
           <div className="font-semibold text-gray-500 mb-1">Session</div>
-          <div className="whitespace-Label">{JSON.stringify(session, null, 2)}</div>
+          <div className="whitespace-pre">{JSON.stringify(session, null, 2)}</div>
         </div>
       }
       {signInFailure && !signingIn && (
