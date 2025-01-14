@@ -71,15 +71,15 @@ export default function Frame(
         paddingRight: context?.client.safeAreaInsets?.right ?? 0,
       }}
     >
-      <div className="w-full max-w-[400px] mx-auto p-4">
-        <h1 className="text-3xl md:text-4xl font-bold text-center mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+      <div className="w-full max-w-[400px] mx-auto p-4 sm:p-6">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
           {title}
         </h1>
-        <div className="bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl p-6 shadow-lg">
-          <div className="text-center text-4xl md:text-5xl font-bold text-white">
+        <div className="bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl p-4 sm:p-6 shadow-lg">
+          <div className="text-center text-3xl sm:text-4xl md:text-5xl font-bold text-white">
             {timeLeft}
           </div>
-          <div className="text-center text-sm mt-3 text-purple-100">
+          <div className="text-center text-xs sm:text-sm mt-2 sm:mt-3 text-purple-100">
             Until Thursday 5pm
           </div>
         </div>
