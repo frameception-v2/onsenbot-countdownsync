@@ -28,7 +28,6 @@ import { truncateAddress } from "~/lib/truncateAddress";
 import { base, optimism } from "wagmi/chains";
 import { BaseError, UserRejectedRequestError } from "viem";
 import { useSession } from "next-auth/react"
-import { Button } from "~/components/ui/button";
 import { PROJECT_TITLE } from "~/lib/constants";
 
 
